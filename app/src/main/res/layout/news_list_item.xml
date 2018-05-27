@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="75dp"
+    android:background="#EEEEEE"
     android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingTop="5dp"
-    android:paddingRight="5dp"
     android:paddingBottom="5dp"
-    android:background="#EEEEEE">
+    android:paddingLeft="12dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp">
 
     <TextView
+        android:id="@+id/item_category"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:text="Politics, Sport"
+        android:textAllCaps="true"
         android:textStyle="bold"
-        android:textAllCaps="true"/>
+        tools:text="Politics, Sport" />
 
     <TextView
         android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.6"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textColor="#000000"
-        tools:text="Very long title that may be very very very long but shouldn't be longer than 1 line."/>
+        tools:text="Very long title that may be very very very long but shouldn't be longer than 1 line." />
 
     <TextView
+        android:id="@+id/item_date_author"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:text= "25.05.18 17:51 | Bob and his friends"/>
-
+        tools:text="25.05.18 17:51 | Bob and his friends" />
 
 
 </LinearLayout>
