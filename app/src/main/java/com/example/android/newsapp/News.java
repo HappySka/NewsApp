@@ -40,7 +40,7 @@ class News {
         return mDate;
     }
 
-    public String getNewsArticleUrl() {
+    public String getNewsUrl() {
         return mArticleUrl;
     }
 

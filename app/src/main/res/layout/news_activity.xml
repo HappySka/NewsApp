@@ -9,8 +9,8 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#666666"
-        android:dividerHeight="2dp"
+        android:divider="@color/divider_color"
+        android:dividerHeight="@dimen/divider_height"
         android:orientation="vertical"
         tools:listitem="@layout/news_list_item"/>
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text=""
-        android:textSize="18sp"
+        android:textSize="@dimen/no_news_text_size"
         android:textStyle="bold" />
 
     <ProgressBar

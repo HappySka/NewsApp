@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,6 +26,8 @@ import butterknife.ButterKnife;
  */
 class NewsAdapter extends ArrayAdapter<News> {
 
+    private Context mContext;
+
     /**
      * Constructs a new NewsAdapter}.
      *
@@ -30,6 +36,7 @@ class NewsAdapter extends ArrayAdapter<News> {
      */
     NewsAdapter(Context context, List<News> news) {
         super(context, 0, news);
+        mContext = context;
     }
 
     /**
@@ -49,14 +56,48 @@ class NewsAdapter extends ArrayAdapter<News> {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.news_list_item, parent, false);
             //Create a new ViewHolder and set it as tag so it can be reused
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
+            holder = new ViewHolder(listItemView);
+            listItemView.setTag(holder);
         }
 
+        News currentNews = getItem(position);
+
+        //sets the News section
+        holder.categoryView.setText(currentNews.getNewsSection());
+
+
+        //sets the News title
+        holder.titleView.setText(currentNews.getNewsTitle());
+
+
+        //set the Date and Authors
+        StringBuilder dateAndAuthors = new StringBuilder();
+
+        //get date and format it
+        String date = formatDate(currentNews.getNewsDate());
+        dateAndAuthors.append(date);
+
+        //get list of author(s) and format it
+        List<String> authors = currentNews.getNewsAuthors();
+        if (authors.size() > 0) {
+            dateAndAuthors.append(mContext.getString(R.string.date_authors_seperator));
+            for (int i = 0; i < authors.size(); i++) {
+                if (i >= 1) {
+                    dateAndAuthors.append(mContext.getString(R.string.author_seperator));
+                }
+                dateAndAuthors.append(authors.get(i));
+            }
+        }
+        //automatic call of the toString method
+        holder.dateView.setText(dateAndAuthors);
 
         return listItemView;
     }
 
+    private String formatDate(DateTime date) {
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm");
+        return fmt.print(date);
+    }
 
     /**
      * holds the views to the TextViews in the list_item so findViewById does not need to be called
@@ -70,7 +111,7 @@ class NewsAdapter extends ArrayAdapter<News> {
         @BindView(R.id.item_date_author)
         TextView dateView;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }

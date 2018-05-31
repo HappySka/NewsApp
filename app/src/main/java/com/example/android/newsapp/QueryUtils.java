@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Helper methods related to requesting and receiving news using the Guardian API.
  */
-public final class QueryUtils {
+final class QueryUtils {
 
     /**
      * Tag for the log messages
