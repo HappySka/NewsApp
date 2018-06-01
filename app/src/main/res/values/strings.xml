@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">News App</string>
     <string name="no_internet_connection">No internet connection! :(</string>
-    <string name="no_news_found">No news articles found!</string>
+    <string name="no_news_found">We cannot find any news at the moment.\n Maybe the website is down?\n Please wait a bit and try again!</string>
     <string name="action_bar_title">Latest news from The Guardian</string>
     <string name="date_authors_seperator">|</string>
     <string name="author_seperator">,</string>

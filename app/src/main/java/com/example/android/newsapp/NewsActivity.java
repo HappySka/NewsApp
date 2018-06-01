@@ -4,10 +4,12 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -111,12 +113,10 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // If there is a valid list of News, then add them to the adapter's
         // data set. This will trigger the ListView to update.
+        progressBar.setVisibility(View.GONE);
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
-            progressBar.setVisibility(View.GONE);
-        }
-        if (emptyView == null) {
-            progressBar.setVisibility(View.GONE);
+        } else {
             emptyView.setText(R.string.no_news_found);
         }
     }
