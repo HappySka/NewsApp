@@ -4,12 +4,10 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -117,7 +115,11 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
         } else {
-            emptyView.setText(R.string.no_news_found);
+            if (QueryUtils.lastHttpResponse == 200) {
+                emptyView.setText(R.string.no_news_found);
+            } else {
+                emptyView.setText(R.string.no_news_http_problem);
+            }
         }
     }
 

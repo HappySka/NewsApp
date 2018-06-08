@@ -80,10 +80,10 @@ class NewsAdapter extends ArrayAdapter<News> {
         //get list of author(s) and format it
         List<String> authors = currentNews.getNewsAuthors();
         if (authors.size() > 0) {
-            dateAndAuthors.append(mContext.getString(R.string.date_authors_seperator));
+            dateAndAuthors.append(mContext.getString(R.string.date_authors_separator));
             for (int i = 0; i < authors.size(); i++) {
                 if (i >= 1) {
-                    dateAndAuthors.append(mContext.getString(R.string.author_seperator));
+                    dateAndAuthors.append(mContext.getString(R.string.author_separator));
                 }
                 dateAndAuthors.append(authors.get(i));
             }
