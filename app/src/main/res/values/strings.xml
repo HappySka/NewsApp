@@ -1,9 +1,50 @@
 <resources>
     <string name="app_name">News App</string>
     <string name="no_internet_connection">No internet connection! :(</string>
-    <string name="no_news_found">We cannot find any news at the moment.\n Maybe try another news section?</string>
     <string name="action_bar_title">Latest news from The Guardian</string>
+
     <string name="date_authors_separator">|</string>
     <string name="author_separator">,</string>
-    <string name="no_news_http_problem">We have some problems retrieving news at the moment. Maybe the website is down? Please try again later.</string>
+
+    <string name="no_news_found">We cannot find any news at the moment.\n Maybe try another news section?</string>
+    <string name="no_news_http_problem">We have some problems retrieving news at the moment. Maybe the website is down?\n Please try again later.\n\n HTTP error code %1$d</string>
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Settings</string>
+
+
+    <string name="settings_before_label">Show only news before</string>
+    <string name="settings_before_key" translatable="false">before</string>
+    <string name="settings_before_default" translatable="false">-</string>
+
+
+    <string name="settings_section_label">News Section</string>
+    <string name="settings_section_key" translatable="false">section</string>
+    <string name="settings_section_default" translatable="false">@string/settings_section_all_value</string>
+
+
+    <string name="settings_section_all_label">All News</string>
+    <string name="settings_section_all_value" translatable="false">all</string>
+
+    <string name="settings_section_politics_label">Politics</string>
+    <string name="settings_section_politics_value" translatable="false">politics</string>
+
+    <string name="settings_section_technology_label">Technology</string>
+    <string name="settings_section_technology_value" translatable="false">technology</string>
+
+    <string name="settings_section_football_label">Football</string>
+    <string name="settings_section_football_value" translatable="false">football</string>
+
+    <string name="settings_section_opinion_label">Opinion</string>
+    <string name="settings_section_opinion_value" translatable="false">commentisfree</string>
+
+    <string name="settings_section_society_label">Society</string>
+    <string name="settings_section_society_value" translatable="false">society</string>
+
+    <string name="settings_section_environment_label">Environment</string>
+    <string name="settings_section_environment_value" translatable="false">environment</string>
+
+
+
+
 </resources>

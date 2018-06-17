@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -38,6 +40,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     TextView emptyView;
     @BindView(R.id.loading_spinner)
     ProgressBar progressBar;
+
     /**
      * Adapter for the list of news
      */
@@ -100,6 +103,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
+    /**
+    Implementation of Loader
+     */
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
         return new NewsLoader(NewsActivity.this, GUARDIAN_REQUEST_URL);
@@ -115,10 +121,12 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
         } else {
+            //HTTP request successful but no news found
             if (QueryUtils.lastHttpResponse == 200) {
                 emptyView.setText(R.string.no_news_found);
             } else {
-                emptyView.setText(R.string.no_news_http_problem);
+                //No successful connection with the API
+                emptyView.setText(getString(R.string.no_news_http_problem,QueryUtils.lastHttpResponse));
             }
         }
     }
@@ -126,5 +134,27 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         mAdapter.clear();
+    }
+
+    /**
+     * Settings menu
+     */
+    @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
