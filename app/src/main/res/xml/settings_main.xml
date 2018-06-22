@@ -8,7 +8,13 @@
         android:entryValues="@array/settings_section_values"
         android:key="@string/settings_section_key"
         android:title="@string/settings_section_label"/>
-    
+
+    <EditTextPreference
+        android:defaultValue="@string/settings_filter_default"
+        android:inputType="text"
+        android:key="@string/settings_filter_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_filter_label" />
 
 
 </PreferenceScreen>

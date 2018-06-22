@@ -4,10 +4,12 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,11 +29,12 @@ import butterknife.ButterKnife;
 public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     /**
-     * URL for news JSON from the Guardian that shows the 10 newest article together with information
-     * about the author(s)
+     * URL for news JSON from the Guardian
      */
     private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?&show-tags=contributor&api-key=test";
+            "https://content.guardianapis.com/search";
+    private static final String GUARDIAN_API_KEY = "0ac6f522-2ebc-4dbc-9f04-93746d280098";
+
     /**
      * ListView, TextView that is used in case no data can be loaded and the progress bar shown during loading
      */
@@ -108,7 +112,28 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(NewsActivity.this, GUARDIAN_REQUEST_URL);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String section = sharedPrefs.getString(getString(R.string.settings_section_key), getString(R.string.settings_section_default));
+        String filter = sharedPrefs.getString(getString(R.string.settings_filter_key), getString(R.string.settings_filter_default));
+
+        Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        //check if the selected search term has at least one alphabet or number in it (i.e " " or "-" would not be used as a search word)
+        boolean validFilterQuery = Pattern.matches(".*\\w.*", filter);
+        if (validFilterQuery) {
+            uriBuilder.appendQueryParameter("q", filter);
+        }
+
+        if (!section.equals(getString(R.string.settings_section_all_value))) {
+            uriBuilder.appendQueryParameter("section", section);
+        }
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("api-key", GUARDIAN_API_KEY);
+
+
+        return new NewsLoader(NewsActivity.this, uriBuilder.toString());
     }
 
     @Override
