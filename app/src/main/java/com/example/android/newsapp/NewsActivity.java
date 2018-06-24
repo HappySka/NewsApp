@@ -33,7 +33,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search";
-    private static final String GUARDIAN_API_KEY = "0ac6f522-2ebc-4dbc-9f04-93746d280098";
+    private static final String GUARDIAN_API_KEY = "test";
 
     /**
      * ListView, TextView that is used in case no data can be loaded and the progress bar shown during loading
